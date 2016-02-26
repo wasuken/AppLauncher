@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://www.hardcodet.net/taskbar"
         xmlns:local="clr-namespace:AppLauncher_v3"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
-        AllowsTransparency="True"
-        WindowStyle="None"
         Title="MainWindow" Height="387.88" Width="312.803" Loaded="Window_Loaded">
 
     <Window.Resources>
@@ -20,13 +20,20 @@
         </ContextMenu>
     </Window.Resources>
 
+
     <Grid Name="grid" Margin="10,10,-8,-62">
+        <!--
+            <tb:TaskbarIcon x:Name="MyNotifyIcon"
+                  IconSource="pack://application:,,,/img/CsIcon.ico"
+                  ToolTipText="通知">
+            </tb:TaskbarIcon>
+        -->
+        
+        
+        
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="332" TabStripPlacement="Right" AllowDrop="True"
                     Margin="2,2,0,0" VerticalAlignment="Top" Width="228" MouseDoubleClick="tabControl_MouseDoubleClick" >
-
-
         </TabControl>
-
         <Button x:Name="button_add" Content="+" HorizontalAlignment="Left" Margin="234,4,0,0" VerticalAlignment="Top" Width="38" Click="button_add_Click"/>
         <Button x:Name="button_save" Content="保存" HorizontalAlignment="Left" Margin="230,300,0,0" VerticalAlignment="Top" Width="42" Click="button_save_Click"/>
         <Button x:Name="button_read" Content="読込" HorizontalAlignment="Left" Margin="230,271,0,0" VerticalAlignment="Top" Width="42" Click="button_read_Click"/>

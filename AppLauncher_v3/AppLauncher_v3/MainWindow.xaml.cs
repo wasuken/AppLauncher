@@ -15,7 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using System.Windows.Shell;
+using Hardcodet.Wpf.TaskbarNotification;
 
 namespace AppLauncher_v3
 {
@@ -63,6 +64,10 @@ namespace AppLauncher_v3
 
 
             readConfig();
+
+            //MyNotifyIcon.ShowBalloonTip("メール通知", "やりたいなあ！", BalloonIcon.Info);
+            
+            
         }
         private void saveConfig()
         {
@@ -114,8 +119,6 @@ namespace AppLauncher_v3
                             if(iList.type != ITEM_TYPE.none)
                                 lb.Items.Add(iList);
                         }
-                            
-                        
                         tabControl.Items.Add(tItem);
                     }
                     
@@ -143,6 +146,19 @@ namespace AppLauncher_v3
         {
             TabItem item = returnTabItem(checkTabItemHeader("default"));
             tabControl.Items.Add(item);
+        }
+        private WriteableBitmap returnIcon(String imgPath)
+        {
+            //MessageBox.Show(imgPath);
+            BitmapImage folIcon = new BitmapImage();
+            MemoryStream data = new MemoryStream(File.ReadAllBytes(imgPath));
+            WriteableBitmap wbmp = new WriteableBitmap(BitmapFrame.Create(data));
+
+            
+            
+            data.Close();
+
+            return wbmp;
         }
         private string checkTabItemHeader(String name)
         {
@@ -211,11 +227,8 @@ namespace AppLauncher_v3
             }
             else if(Directory.Exists(item))
             {
-                BitmapImage folIcon = new BitmapImage();
-                MemoryStream data = new MemoryStream(File.ReadAllBytes(@"../../img/folder.png"));
-                WriteableBitmap wbmp = new WriteableBitmap(BitmapFrame.Create(data));
-                data.Close();
-                img.Source = wbmp;
+                
+                img.Source = returnIcon(@"img/folder.png");
                 type = ITEM_TYPE.folder;
             }
             else
@@ -225,6 +238,7 @@ namespace AppLauncher_v3
             }
             return new ImageList(item, img.Source, type);
         }
+        
 
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
